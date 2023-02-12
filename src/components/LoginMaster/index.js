@@ -1,15 +1,15 @@
 import {Component} from 'react'
-import cookies from 'js-cookie'
+// import cookies from 'js-cookie'
+
 import './index.css'
 
-class LoginForm extends Component {
-  state = {username: '', password: ''}
+class LoginMaster extends Component {
+  state = {username: '', password: '', msg: '', error: false}
 
-  onSubmitSuccess = jwtToken => {
+  onSubmitSuccess = () => {
     const {history} = this.props
 
-    history.push('/')
-    cookies.set('jwtToken', jwtToken, {expires: 30})
+    history.push('/masterhome')
   }
 
   onSubmitFailure = errorMsg => {
@@ -19,20 +19,23 @@ class LoginForm extends Component {
   submitForm = async event => {
     event.preventDefault()
     const {username, password} = this.state
-    const userDetails = {username, password}
-    const url = 'https://apis.ccbp.in/login'
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-    }
-    const response = await fetch(url, options)
-    const data = await response.json()
-    console.log(data)
-    if (data.jwt_token !== undefined) {
-      this.onSubmitSuccess(data.jwt_token)
+    const user = {username, password}
+    const data = localStorage.getItem('master')
+    const parsedData = JSON.parse(data)
+
+    const isEqual =
+      user.username === parsedData.username &&
+      user.password === parsedData.password
+
+    console.log(isEqual)
+    if (isEqual) {
+      this.onSubmitSuccess()
+
+      this.setState({error: true, msg: 'Success'})
     } else {
-      this.onSubmitFailure(data.error_msg)
+      this.setState({error: true, msg: 'user Does not Exists'})
     }
+    this.setState({username: '', password: ''})
   }
 
   onchangeUsername = event => {
@@ -82,19 +85,23 @@ class LoginForm extends Component {
   }
 
   render() {
+    const {error, msg} = this.state
     return (
       <div className="bg-container">
-        <form onSubmit={this.submitForm} className="submit-form">
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
-            alt="logo"
-          />
-          <div>{this.renderUserField()}</div>
-          <div>{this.renderPasswordField()}</div>
-          <button type="submit">Login</button>
-        </form>
+        <div>
+          <form onSubmit={this.submitForm} className="submit-form">
+            <h1> Master Login </h1>
+            <div>{this.renderUserField()}</div>
+            <div>{this.renderPasswordField()}</div>
+            <button className="master-button-signUp" type="submit">
+              LogIn
+            </button>
+
+            {error && <p>{msg}</p>}
+          </form>
+        </div>
       </div>
     )
   }
 }
-export default LoginForm
+export default LoginMaster

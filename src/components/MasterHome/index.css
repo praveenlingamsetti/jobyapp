@@ -1,0 +1,31 @@
+.master-home-container {
+  background-color: cadetblue;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.answer-container {
+  background-color: antiquewhite;
+  shape-outside: linear-gradient();
+}
+.master-home-card {
+  box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
+}
+.ask-question-button {
+  background-color: darkolivegreen;
+  color: white;
+  height: 30px;
+  width: 70px;
+}
+.password-input {
+  height: 30px;
+}
+.logout-button {
+  background-color: darkslategray;
+  height: 30px;
+  width: 70px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}

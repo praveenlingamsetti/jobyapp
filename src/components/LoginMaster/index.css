@@ -6,9 +6,16 @@
   justify-content: center;
   align-items: center;
 }
-
+.master-signUp {
+  color: bisque;
+}
+.master-button-signUp {
+  background-color: aquamarine;
+  margin-left: 90px;
+  margin-top: 10px;
+}
 .submit-form {
-  height: 30vh;
+  height: 35vh;
   background-color: #202020;
   border-radius: 10px;
   padding: 25px;

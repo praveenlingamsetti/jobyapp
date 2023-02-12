@@ -1,55 +1,40 @@
+import {Component} from 'react'
 import {Route, Switch} from 'react-router-dom'
-import LoginForm from './components/LoginForm'
-import Jobs from './components/jobs'
+import Main from './components/Main'
+import LoginMaster from './components/LoginMaster'
+import LoginStudent from './components/LoginStudent'
+import SignUpMaster from './components/SignUpMaster'
+import SignUpStudent from './components/SignUpStudent'
+import StudentHome from './components/StudentHome'
+import MasterHome from './components/MasterHome'
+import StudentContext from './Context/StudentContext'
+
 import './App.css'
 
-import Home from './components/Home'
-/*
-const employmentTypesList = [
-  {
-    label: 'Full Time',
-    employmentTypeId: 'FULLTIME',
-  },
-  {
-    label: 'Part Time',
-    employmentTypeId: 'PARTTIME',
-  },
-  {
-    label: 'Freelance',
-    employmentTypeId: 'FREELANCE',
-  },
-  {
-    label: 'Internship',
-    employmentTypeId: 'INTERNSHIP',
-  },
-]
+class App extends Component {
+  state = {list: [{question: 'sum', valuee: 5}]}
 
-const salaryRangesList = [
-  {
-    salaryRangeId: '1000000',
-    label: '10 LPA and above',
-  },
-  {
-    salaryRangeId: '2000000',
-    label: '20 LPA and above',
-  },
-  {
-    salaryRangeId: '3000000',
-    label: '30 LPA and above',
-  },
-  {
-    salaryRangeId: '4000000',
-    label: '40 LPA and above',
-  },
-]
+  addOperation = product => {
+    this.setState(prevState => ({list: [...prevState.list, product]}))
+  }
 
-*/
-const App = () => (
-  <Switch>
-    <Route exact path="/login" component={LoginForm} />
-    <Route exact path="/" component={Home} />
-    <Route exact path="/jobs" component={Jobs} />
-  </Switch>
-)
+  render() {
+    const {list} = this.state
+
+    return (
+      <StudentContext.Provider value={{list, operation: this.addOpertion}}>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route exact path="/loginmaster" component={LoginMaster} />
+          <Route exact path="/loginstudent" component={LoginStudent} />
+          <Route exact path="/signupmaster" component={SignUpMaster} />
+          <Route exact path="/signupstudent" component={SignUpStudent} />
+          <Route exact path="/studenthome" component={StudentHome} />
+          <Route exact path="/masterhome" component={MasterHome} />
+        </Switch>
+      </StudentContext.Provider>
+    )
+  }
+}
 
 export default App

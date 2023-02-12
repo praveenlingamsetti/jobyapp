@@ -1,0 +1,22 @@
+.student-home-section {
+  background-color: darkcyan;
+  height: 100vh;
+  background-size: cover;
+}
+.questions-list {
+  list-style-type: none;
+  background-color: darkcyan;
+  height: 100vh;
+}
+.student-log {
+  color: darkcyan;
+  margin-left: 45vw;
+}
+.go-to-master {
+  margin-left: 78vw;
+  background-color: blueviolet;
+  border: none;
+  color: white;
+  height: 4vh;
+  border-radius: 10px;
+}
